@@ -74,3 +74,54 @@ utils.captureTouch = function(element) {
 
 	return touch;
 };
+
+
+/*
+	Change #fff520 into rgb(255,245,32)
+	@param: 	color  [,alpha]
+	@return: 	rgb(r,g,b) | rgba(r,g,b,a)
+*/
+utils.colorToRGB = function(color, alpha) {
+	// if string format , convert to numer
+	if(typeof color === 'string' && color[0] === '#') {
+		color = window.parseInt(color.slice(1),16);
+	}	
+	alpha = (alpha === undefined) ? 1 : alpha;
+
+	// extract component value
+	var r = color >> 16 & 0xFF,
+		g = color >>  8 & 0xFF,
+		b = color 		& 0xFF,
+		a = (alpha < 0) ? 0 : ((alpha > 1) ? 1: alpha);		// check range
+
+	// use 'rgba' if needed
+	if( a === 1) {
+		return "rgb("+ r + "," + g + "," +b + ")";
+	} else {
+		return "rgba("+ r + "," + g + "," +b + ","+ a +")";
+	}
+}
+
+/*
+	Parse 0xFFF520 to #fff520
+	@param: 	0xFFF520 [, bool toNumber]
+	@return: 	#fff520 [toNumber == true -> 16774432]
+*/
+utils.parseColor = function(color, toNumber) {
+	if (toNumber === true) {
+		if(typeof color === 'number') {
+			return (color | 0);		// chop off decimal
+		} 
+
+		if(typeof color === 'string' && color[0] === '#') {
+			color = color.slice(1);
+		}
+		return window.parseInt(color, 16);
+	} else {
+		if(typeof color === 'number') {
+			// make sure our hexadecimal number is padded out 
+			color = '#' + ('00000' + (color | 0).toString(16)).substr(-6);
+		}
+		return color;
+	}
+}
