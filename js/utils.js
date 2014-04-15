@@ -125,3 +125,24 @@ utils.parseColor = function(color, toNumber) {
 		return color;
 	}
 }
+
+/*
+	Clear R|G|B
+	@param: 	ImageData
+*/
+utils.clearRGB = function(context,x,y,width,height) {
+
+	var imageData = context.getImageData(x,y,width,height);
+	var pixels    = imageData.data;
+
+	// 	
+
+	for (var offset = 0, len = pixels.length; offset < len; offset+= 4) {
+		pixels[offset]		= 	255;		//	red
+		pixels[offset + 1]	=	245;		// 	green
+		pixels[offset + 2]	=	32;		//	blue
+		pixels[offset + 3]	=	1;		// alpha
+	}
+
+	context.putImageData(imageData,0,0);
+}
