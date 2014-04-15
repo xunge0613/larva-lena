@@ -127,21 +127,20 @@ utils.parseColor = function(color, toNumber) {
 }
 
 /*
-	Clear R|G|B
-	@param: 	ImageData
+	Reverse R|G|B
+	@param: 	context,x,y,width,height
+	@return: 	255 - R|G|B
 */
-utils.clearRGB = function(context,x,y,width,height) {
+utils.reverseRGB = function(context,x,y,width,height) {
 
 	var imageData = context.getImageData(x,y,width,height);
 	var pixels    = imageData.data;
 
-	// 	
-
 	for (var offset = 0, len = pixels.length; offset < len; offset+= 4) {
-		pixels[offset]		= 	255;		//	red
-		pixels[offset + 1]	=	245;		// 	green
-		pixels[offset + 2]	=	32;		//	blue
-		pixels[offset + 3]	=	1;		// alpha
+		pixels[offset]		= 	255 - pixels[offset];			//	red
+		pixels[offset + 1]	=	255 - pixels[offset + 1];		// 	green
+		pixels[offset + 2]	=	255 - pixels[offset + 2];		//	blue
+	  //pixels[offset + 3]	=	255 - pixels[offset + 3];		// alpha
 	}
 
 	context.putImageData(imageData,0,0);

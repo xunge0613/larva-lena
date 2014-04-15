@@ -23,11 +23,13 @@ window.onload = function() {
 	//console.log(utils.colorToRGB(color16)) ;		// rgb(255,245,32) 
 
 	//	v 0.0.3
-	//	test clear RGB
+	//	test revserse RGB
 	var context = canvas.getContext('2d');
-	var clearRGBButton = document.getElementById('clearRGB');
-	clearRGBButton.addEventListener('mousedown',function() {
-		utils.clearRGB(context,0,0,canvas.width,canvas.height);
+	context.fillStyle="#fff520";
+	context.fillRect(0,0,315,315);
+	var reverseRGBButton = document.getElementById('reverseRGB');
+	reverseRGBButton.addEventListener('mousedown',function() {
+		utils.reverseRGB(context,0,0,canvas.width,canvas.height);
 	})	
 
 };
