@@ -26,10 +26,23 @@ window.onload = function() {
 	//	test revserse RGB
 	var context = canvas.getContext('2d');
 	context.fillStyle="#fff520";
-	context.fillRect(0,0,315,315);
+	context.fillRect(0,0,315,315);	
 	var reverseRGBButton = document.getElementById('reverseRGB');
 	reverseRGBButton.addEventListener('mousedown',function() {
-		utils.reverseRGB(context,0,0,canvas.width,canvas.height);
-	})	
+		var imageData = context.getImageData(0,0,canvas.width,canvas.height);
+		var pixels    = imageData.data;
+		utils.reverseRGB(pixels);
+		context.putImageData(imageData,0,0);
+	});
+
+	// v 0.0.3.1 
+	// Grayscale 
+	var grayscaleBtn = document.getElementById('grayscaleBtn');
+	grayscaleBtn.addEventListener('mousedown',function() {
+		var imageData = context.getImageData(0,0,canvas.width,canvas.height);
+		var pixels    = imageData.data;
+		utils.grayScale(pixels);
+		context.putImageData(imageData,0,0);
+	})		
 
 };
