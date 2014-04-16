@@ -45,4 +45,13 @@ window.onload = function() {
 		context.putImageData(imageData,0,0);
 	})		
 
+	// v 0.0.3.2 
+	// FillColor	
+	var fillColorBtn = document.getElementById('fillColorBtn');	
+	var colorInput   = document.getElementById('colorInput');
+	fillColorBtn.addEventListener('mousedown',function() {
+		var color = utils.parseColor(colorInput.value);
+		context.fillStyle=color;
+		context.fillRect(0,0,315,315);
+	})		
 };

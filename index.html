@@ -7,8 +7,17 @@
 </head>
 <body>
 	<canvas id="canvas" width="400" height="400"></canvas>
-	<button id="reverseRGB">确认黑化</button>
-	<button id="grayscaleBtn">确认灰化</button>
+
+	<section id="section_action">
+		<button id="reverseRGB">确认黑化</button>
+		<button id="grayscaleBtn">确认灰化</button>
+		<div id="fillColor" class="buttonWithInput">
+			<input type="text" id="colorInput" />
+			<button id="fillColorBtn">确认色化</button>	
+		</div>
+		
+	</section>
+
 	<script src="js/utils.js"></script>
 	<script src="js/index.js"></script>  
 </body>
