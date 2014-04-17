@@ -1,3 +1,5 @@
+_XX_GLOBAL = {};
+
 window.onload = function() {
 
 	var canvas = document.getElementById('canvas');
@@ -27,10 +29,12 @@ window.onload = function() {
 	var context = canvas.getContext('2d');
 	context.fillStyle="#fff520";
 	context.fillRect(0,0,315,315);	
+
+	var imageData = context.getImageData(0,0,canvas.width,canvas.height);
+	var pixels    = imageData.data;
+
 	var reverseRGBButton = document.getElementById('reverseRGB');
-	reverseRGBButton.addEventListener('mousedown',function() {
-		var imageData = context.getImageData(0,0,canvas.width,canvas.height);
-		var pixels    = imageData.data;
+	reverseRGBButton.addEventListener('mousedown',function() {		
 		utils.reverseRGB(pixels);
 		context.putImageData(imageData,0,0);
 	});
@@ -38,9 +42,7 @@ window.onload = function() {
 	// v 0.0.3.1 
 	// Grayscale 
 	var grayscaleBtn = document.getElementById('grayscaleBtn');
-	grayscaleBtn.addEventListener('mousedown',function() {
-		var imageData = context.getImageData(0,0,canvas.width,canvas.height);
-		var pixels    = imageData.data;
+	grayscaleBtn.addEventListener('mousedown',function() {	
 		utils.grayScale(pixels);
 		context.putImageData(imageData,0,0);
 	})		
@@ -53,5 +55,49 @@ window.onload = function() {
 		var color = utils.parseColor(colorInput.value);
 		context.fillStyle=color;
 		context.fillRect(0,0,315,315);
-	})		
+	});
+
+	/* v 0.0.3.3 flash */
+	_XX_GLOBAL.enableGaoNeng = window.confirm("前方高能！是否继续?");
+	var disableGaoNeng = document.getElementById("disableGaoNeng");
+	disableGaoNeng.addEventListener('mousedown',function() {
+		_XX_GLOBAL.enableGaoNeng = false;
+	})
+
+	(function drawFrame() {
+		if(_XX_GLOBAL.enableGaoNeng === true)
+		{
+			window.requestAnimationFrame(drawFrame,canvas);	
+		}
+
+		// draw some stripes: red,green and blue
+		for (var i = 0; i < canvas.width; i += 10) {
+			for (var j = 0; j< canvas.height; j+= 10) {
+				context.fillStyle = (i % 20 === 0) ? "#f00" : ( (i % 30 === 0) ? "#0f0" : "00f");
+				context.fillRect(i,j,10,10);
+			}
+		}
+	
+		// pixels iteration
+		for (var y = 0; y < imageData.height; y += 1) {
+			for (var x = 0; x < imageData.width; x += 1) {
+
+				var dx 		= x - mouse.x;
+					dy 		= y - mouse.y;
+					dist 	= Math.sqrt( dx * dx+ dy * dy),
+					offset	= (x + y * imageData.width) * 4,
+					r 		= pixels[offset],
+					g 		= pixels[offset + 1],
+					b 		= pixels[offset + 2];
+
+				pixels[offset] 		= Math.cos(r * dist * 0.001) 	* 256;
+				pixels[offset + 1]	= Math.sin(g * dist * 0.001) 	* 256;
+				pixels[offset + 2]	= Math.cos(b * dist * 0.0005) 	* 256;
+
+			}
+		}
+		context.putImageData(imageData,0,0);
+	}());
+
+
 };
