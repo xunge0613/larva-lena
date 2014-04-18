@@ -64,6 +64,7 @@ window.onload = function() {
 		_XX_GLOBAL.enableGaoNeng = false;
 	})
 
+	var drawFrame ;	// in order to avoid Window Error #issue is it ok?
 	(function drawFrame() {
 		if(_XX_GLOBAL.enableGaoNeng === true)
 		{
@@ -99,5 +100,18 @@ window.onload = function() {
 		context.putImageData(imageData,0,0);
 	}());
 
-
+	/* v 0.0.3.4 draw image using canvas */
+	var image = new Image();
+	var drawImageBtn 	= document.getElementById("drawImageBtn");
+	var drawImageInput 	= document.getElementById('drawImageInput');
+	utils.bind(drawImageBtn,'mousedown',function() {
+		image.crossOrigin = 'anonymous';		
+		image.src = drawImageInput.value;	
+		image.onload = function() {
+			//imageData = context.getImageData(0,0,canvas.width,canvas.height); 
+			//pixels    = imageData.data;
+			context.drawImage(image,0,0);	
+		}		
+	});
+	
 };

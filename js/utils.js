@@ -1,6 +1,37 @@
-// Toolkit Functions
+//	 Global
 
 var utils = {};
+
+
+// Compatibility
+// ----------------------------------------------
+
+/*
+	if browser doesn't support requestAnmationFrame
+*/
+if( !window.requestAnimationFrame) {
+	window.requestAnimationFrame = (
+		window.webkitRequestAnimationFrame 	|| 
+		window.mozRequestAnimationFrame		||
+		window.oRequestAnimationFrame		||
+		window.msRequestAnimationFrame		||
+		function (callback) {
+			return window.setTimeout(callback, 1000 / 60);
+		}
+	)
+}
+
+
+// Toolkit Functions
+// ----------------------------------------------
+
+/*
+	Bind
+	@param: 	target DOM Element , event	
+*/
+utils.bind = function(element,event,_function) {	
+	element.addEventListener(event,_function);
+}
 
 /*
 	Return current relative Mouse Position When On target DOM Element
