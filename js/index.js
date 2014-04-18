@@ -107,10 +107,11 @@ window.onload = function() {
 	utils.bind(drawImageBtn,'mousedown',function() {
 		image.crossOrigin = 'anonymous';		
 		image.src = drawImageInput.value;	
-		image.onload = function() {
-			//imageData = context.getImageData(0,0,canvas.width,canvas.height); 
-			//pixels    = imageData.data;
+		image.onload = function() {			
 			context.drawImage(image,0,0);	
+			/* v 0.0.3.5 apply simply filter on LOCAL canvas image */
+			imageData = context.getImageData(0,0,canvas.width,canvas.height); 
+			pixels    = imageData.data;
 		}		
 	});
 	
