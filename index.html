@@ -56,14 +56,23 @@
 		<button id="grayscaleBtn">确认灰化</button>
 		<button id="disableGaoNeng">高能预警</button>
 		<div id="fillColor" class="buttonWithInput">
-			<input type="text" id="colorInput" />
+			<input type="text" id="colorInput" placeholder="eg: #fff520" />
 			<button id="fillColorBtn">确认色化</button>	
 		</div>
 		<div id="drawImage" class="buttonWithInput">
-      <input type="text" id="drawImageInput" placeholder="eg: images/xiaobai.jpg" />      
-      <button id="drawImageBtn">加载图片</button> 
-      <button id="loadLocalImageBtn">本地图片</button>
-    </div>
+            <input type="text" id="drawImageInput" placeholder="eg: images/xiaobai.jpg" />      
+            <button id="drawImageBtn">加载图片</button> 
+            <button id="loadLocalImageBtn">本地图片</button>
+        </div>
+        <div id="filter_brightness" class="buttonWithInput">
+            <input type="text" id="filter_brightnessInput" placeholder="Numeric Brightness Value" />
+            <button id="filter_brightnessBtn">要有光</button>
+        </div>
+        <div id="filter_threshold_0_1" class="buttonWithInput">
+            <input type="text" id="filter_threshold_0_1Input" placeholder="Grayscale Threshold" />
+            <button id="filter_threshold_0_1Btn">阈值-黑白</button>
+        </div>
+
 	</section>
 
 	<script src="js/utils.js"></script>

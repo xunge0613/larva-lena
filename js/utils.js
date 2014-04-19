@@ -1,6 +1,9 @@
 //	 Global
 
-var utils = {};
+var utils = {
+	filters: {}	// DIP Filters
+};
+
 
 
 // Compatibility
@@ -24,6 +27,9 @@ if( !window.requestAnimationFrame) {
 
 // 	Toolkit Functions
 // 	---------------------------------------------
+
+//	X = utils.xquery
+//	X.bind()
 
 /*
 	Bind
@@ -173,26 +179,21 @@ utils.parseColor = function(color, toNumber) {
 	}
 }
 
-/*
-	Reverse R|G|B
-	@param: 	pixels
-	@return: 	255 - R|G|B
-*/
-utils.reverseRGB = function(pixels) {	
-	for (var offset = 0, len = pixels.length; offset < len; offset+= 4) {
-		pixels[offset]		= 	255 - pixels[offset];			//	red
-		pixels[offset + 1]	=	255 - pixels[offset + 1];		// 	green
-		pixels[offset + 2]	=	255 - pixels[offset + 2];		//	blue
-	  //pixels[offset + 3]	=	255 - pixels[offset + 3];		// alpha
-	}	
-}
+
+
+//	DIP Filters
+//	-------------------------------------------
 
 /*
 	Grayscale 
 	@param: 	pixels
 	@return: 	grayscaled
+
+	@algorithm:
+		x = (0.2126 * r) + (0.7152 * g) + (0.0722 * b)
+		r = g = b = x
 */
-utils.grayScale = function(pixels) {
+utils.filters.grayScale = function(pixels) {
 	for (var offset = 0, len = pixels.length; offset < len; offset+= 4) {
 		var r = pixels[offset],
 			g = pixels[offset + 1],
@@ -202,4 +203,60 @@ utils.grayScale = function(pixels) {
 
 		pixels[offset] = pixels[offset +1] = pixels[offset + 2] = y;
 	}
+	return pixels;
+}
+
+/*
+	Reverse R|G|B
+	@param: 	pixels
+	@return: 	255 - R|G|B
+
+	@algorithm:
+		x = 255 -x;		( x = r,g,b )
+*/
+utils.filters.reverseRGB = function(pixels) {	
+	for (var offset = 0, len = pixels.length; offset < len; offset+= 4) {
+		pixels[offset]		= 	255 - pixels[offset];			//	red
+		pixels[offset + 1]	=	255 - pixels[offset + 1];		// 	green
+		pixels[offset + 2]	=	255 - pixels[offset + 2];		//	blue
+	  //pixels[offset + 3]	=	255 - pixels[offset + 3];		// alpha
+	}	
+}
+
+/*
+	Ajusting Brightness
+	@param: pixels, brightness
+
+	@algorithm:
+		x += brightness;	( x=r,g,b )
+*/
+utils.filters.brightness = function(pixels,brightness) {
+	for (var offset = 0 , len = pixels.length; offset < len; offset+= 4) {
+		pixels[offset]		+= brightness;
+		pixels[offset + 1]	+= brightness;
+		pixels[offset + 2]	+= brightness;
+	}
+	return pixels;
+}
+
+/*
+	01Threshold Filter
+	@param: pixels, threshold
+
+	@algorithm:
+		Given threshold,
+		grayScale > threshold : 255 ? 0
+*/
+utils.filters.threshold_0_1 = function(pixels,threshold) {
+	for (var offset = 0, len = pixels.length; offset < len; offset+= 4) {
+		var r = pixels[offset],
+			g = pixels[offset + 1],
+			b = pixels[offset + 2];
+
+		var v = ( (0.2126 * r) + (0.7152 * g) + (0.0722 * b) ) >= threshold ? 255 : 0;
+
+		pixels[offset] = pixels[offset + 1] = pixels[offset + 2] = v;
+
+	}
+
 }

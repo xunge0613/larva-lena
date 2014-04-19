@@ -35,7 +35,7 @@ window.onload = function() {
 
 	var reverseRGBButton = document.getElementById('reverseRGB');
 	reverseRGBButton.addEventListener('mousedown',function() {		
-		utils.reverseRGB(pixels);
+		utils.filters.reverseRGB(pixels);
 		context.putImageData(imageData,0,0);
 	});
 
@@ -43,7 +43,7 @@ window.onload = function() {
 	// Grayscale 
 	var grayscaleBtn = document.getElementById('grayscaleBtn');
 	grayscaleBtn.addEventListener('mousedown',function() {	
-		utils.grayScale(pixels);
+		utils.filters.grayScale(pixels);
 		context.putImageData(imageData,0,0);
 	})		
 
@@ -137,4 +137,25 @@ window.onload = function() {
 		utils.trigger(drawImageBtn,'mousedown');
 	});
 	
+	/*
+		v 0.0.4 More Filter Functions
+	*/
+
+	// Ajusting Brightness
+	var filter_brightnessBtn 	= document.getElementById('filter_brightnessBtn');
+	var filter_brightnessInput 	= document.getElementById('filter_brightnessInput');
+	utils.bind(filter_brightnessBtn,'mousedown',function() {
+		var brightness = window.parseInt(filter_brightnessInput.value);
+		utils.filters.brightness(pixels,brightness);
+		context.putImageData(imageData,0,0);
+	});
+
+	// Grayscale Threshold Filter
+	var filter_threshold_0_1Btn		= document.getElementById('filter_threshold_0_1Btn');
+	var filter_threshold_0_1Input 	= document.getElementById('filter_threshold_0_1Input');
+	utils.bind(filter_threshold_0_1Btn,'mousedown',function() {
+		var threshold = window.parseInt(filter_threshold_0_1Input.value);
+		utils.filters.threshold_0_1(pixels,threshold);
+		context.putImageData(imageData,0,0);
+	});
 };
