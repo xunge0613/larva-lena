@@ -1,6 +1,9 @@
 #section_action .buttonWithInput {
   margin: 10px 0;
 }
+#section_action .buttonWithInput button {
+  margin-right: 10px;
+}
 #section_action button {
   display: inline-block;
   margin-right: 20px;

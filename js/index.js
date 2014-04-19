@@ -105,14 +105,36 @@ window.onload = function() {
 	var drawImageBtn 	= document.getElementById("drawImageBtn");
 	var drawImageInput 	= document.getElementById('drawImageInput');
 	utils.bind(drawImageBtn,'mousedown',function() {
-		image.crossOrigin = 'anonymous';		
-		image.src = drawImageInput.value;	
+		image.crossOrigin = 'Anonymous';		
+			
 		image.onload = function() {			
-			context.drawImage(image,0,0);	
+			context.drawImage(image,0,0);
+			/* 	v 0.0.3.6 CORS Image #ISSUE#
+				CORS_Enabled_Image 
+				https://developer.mozilla.org/en-US/docs/HTML/CORS_Enabled_Image	
+			*/	
+			localStorage.setItem( "savedImageData", canvas.toDataURL("image/png") );
 			/* v 0.0.3.5 apply simply filter on LOCAL canvas image */
 			imageData = context.getImageData(0,0,canvas.width,canvas.height); 
 			pixels    = imageData.data;
-		}		
+		}
+
+		image.src = drawImageInput.value;
+		
+		// make sure the load event fires for cached images too
+		if ( image.complete || image.complete === undefined ) {
+		    image.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+		    image.src = drawImageInput.value;
+		}	
+	});
+
+	// load local image
+	var loadLocalImageBtn = document.getElementById('loadLocalImageBtn');
+	utils.bind(loadLocalImageBtn,'mousedown',function() {
+		// Load local image
+		drawImageInput.value = 'images/xiaobai.jpg';
+		// trigger mousedown on drawImageInput
+		utils.trigger(drawImageBtn,'mousedown');
 	});
 	
 };

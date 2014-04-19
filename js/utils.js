@@ -22,8 +22,8 @@ if( !window.requestAnimationFrame) {
 }
 
 
-// Toolkit Functions
-// ----------------------------------------------
+// 	Toolkit Functions
+// 	---------------------------------------------
 
 /*
 	Bind
@@ -33,6 +33,19 @@ utils.bind = function(element,event,_function) {
 	element.addEventListener(event,_function);
 }
 
+/*
+	trigger Mouse Event ONLY
+*/
+utils.trigger = function(element,event) {
+	var _event = new MouseEvent(event,
+			{
+				'view': window,
+				'bubbles': true,
+				'cancelable': true
+			}
+		);
+	element.dispatchEvent(_event);
+}
 /*
 	Return current relative Mouse Position When On target DOM Element
 	@param: 	target DOM Element
@@ -106,6 +119,9 @@ utils.captureTouch = function(element) {
 	return touch;
 };
 
+
+// 	DIP Functions
+//	------------------------------------------------
 
 /*
 	Change #fff520 into rgb(255,245,32)
