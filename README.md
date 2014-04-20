@@ -13,12 +13,18 @@ Ah...So, maybe it was just a joke... and Dalston Xu is just trying to use it to 
 > 《图像处理和分析教程》
 
 
+## Demo 
 
+> http://xuxun.me/lab/2012/larva-lena/](http://xuxun.me/lab/2012/larva-lena/
 
 ## Change Log
 
+#### v 0.0.4 Basic DIP functions
 
-#### v 0.0.3 Basic DIP functions
+- Ajusting Brightness
+- Grayscale Threshold Filter 
+
+#### v 0.0.3 Basic HTML5 Canvas Image Process
 
 - v 0.0.3.0 add Reverse RGB function RGB -> 255 - RGB
 - v 0.0.3.1 add GrayScale function	P84
