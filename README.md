@@ -15,7 +15,7 @@ Ah...So, maybe it was just a joke... and Dalston Xu is just trying to use it to 
 
 ## Demo 
 
-> http://xuxun.me/lab/2012/larva-lena/](http://xuxun.me/lab/2012/larva-lena/
+>  http://xuxun.me/lab/2012/larva-lena/
 
 ## Change Log
 
