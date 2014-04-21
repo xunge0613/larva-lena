@@ -159,5 +159,30 @@ window.onload = function() {
 		context.putImageData(imageData,0,0);
 	});
 
-	// 
+	/*
+		v 0.0.4.1 	Convolving Filtering
+	*/
+	var filter_convolvingFilterBtn 		= document.getElementById('filter_convolvingFilterBtn');
+	var filter_convolvingFilterInput	= document.getElementById('filter_convolvingFilterInput');
+	utils.bind(filter_convolvingFilterBtn,'mousedown',function() {
+		// to maintain the brightness of the image , the sum of the matrix values should be one		
+		//var weights = [1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9];		// soften
+		var weights = [0,-1,0,-1,5,-1,0,-1,0];		// sharpen
+		utils.filters.convolute(imageData,weights);
+		context.putImageData(imageData,0,0);
+	});
+
+	var filter_convolvingSharpenBtn 	= document.getElementById('filter_convolvingSharpenBtn');
+	utils.bind(filter_convolvingSharpenBtn,'mousedown',function() {
+		var weights = [0,-1,0,-1,5,-1,0,-1,0];		// sharpen
+		utils.filters.convolute(imageData,weights);
+		context.putImageData(imageData,0,0);
+	})
+
+	var filter_convolvingBlurBtn 		= document.getElementById('filter_convolvingBlurBtn');
+	utils.bind(filter_convolvingSharpenBtn,'mousedown',function() {
+		var weights = [1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9];		// soften
+		utils.filters.convolute(imageData,weights);
+		context.putImageData(imageData,0,0);
+	})
 };

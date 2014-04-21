@@ -260,3 +260,52 @@ utils.filters.threshold_0_1 = function(pixels,threshold) {
 	}
 
 }
+
+/*
+	Convolution Filters
+	@param: imageData,[weights,...]
+	
+	@notes: 2D data change , so here we need imageData , not pixels for 1D
+*/
+utils.filters.convolute = function(imageData,weights) {
+	var side = Math.round(Math.sqrt(weights.length));	// mask width
+	var halfSide = Math.floor(side/2);					// half mask width
+	var pixels	= imageData.data;		// src pixels
+	var sw		= imageData.width;	// src width
+	var sh 		= imageData.height; // src height
+	// pad output by the convolution matrix
+	var w 		= sw;
+	var h 		= sh;
+	//var output  = 
+	
+	var dst = new Uint8ClampedArray(pixels);	// 深copy
+
+	// go through the image pixels
+	for(var y=0; y<h; y++) {
+		for(var x=0; x<w; x++) {
+			var sy = y;		// side y
+			var sx = x;
+			var dstOffset = (y*w+x)*4;		// output
+			//
+			var r = 0, g = 0, b = 0;
+			for (var cy=0;cy<side;cy++) {		// mask metrix
+				for(var cx=0; cx<side; cx++) {
+					var scy = sy + cy - halfSide;
+					var scx = sx + cx - halfSide;
+					if(scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
+						var offset 	= (scy * sw + scx) * 4;
+						var wt 		= weights[cy*side + cx]; 
+						r += pixels[offset] 	* wt;
+						g += pixels[offset + 1]	* wt;
+						b += pixels[offset + 2]	* wt;
+					}
+				}
+			}
+			dst[dstOffset]		= r;
+			dst[dstOffset + 1]  = g;
+			dst[dstOffset + 2]  = b;
+		}
+	}
+	pixels.set(dst);	// update dataImage.data 
+	return pixels;
+}

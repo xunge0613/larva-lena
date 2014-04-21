@@ -22,7 +22,8 @@ Ah...So, maybe it was just a joke... and Dalston Xu is just trying to use it to 
 #### v 0.0.4 Basic DIP functions
 
 - Ajusting Brightness
-- Grayscale Threshold Filter 
+- Grayscale Threshold Filter
+- Convolution Filter ( Sharpen, Blur) v 0.0.4.1 
 
 #### v 0.0.3 Basic HTML5 Canvas Image Process
 
