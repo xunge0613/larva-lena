@@ -158,4 +158,6 @@ window.onload = function() {
 		utils.filters.threshold_0_1(pixels,threshold);
 		context.putImageData(imageData,0,0);
 	});
+
+	// 
 };
