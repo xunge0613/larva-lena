@@ -1,10 +1,19 @@
 //	 Global
 
 var utils = {
+	Math: {},	// Math Functions
 	filters: {}	// DIP Filters
 };
 
-
+/*
+	Array Toolkit
+*/
+Array.prototype.str2num = function(options) {
+	for (var i = this.length - 1; i >= 0; i--) {
+		this[i] = parseInt(this[i]);
+	};
+	return this;
+}
 
 // Compatibility
 // ----------------------------------------------
@@ -22,6 +31,16 @@ if( !window.requestAnimationFrame) {
 			return window.setTimeout(callback, 1000 / 60);
 		}
 	)
+}
+
+//	Math Functions
+//	---------------------------------------------
+utils.Math.SUM = function(_array) {
+	var sum = 0;
+	for (var i = _array.length - 1; i >= 0; i--) {
+		sum += _array[i];
+	};
+	return sum;
 }
 
 
@@ -276,7 +295,14 @@ utils.filters.convolute = function(imageData,weights) {
 	// pad output by the convolution matrix
 	var w 		= sw;
 	var h 		= sh;
-	//var output  = 
+	
+	// Σ(weight) = 1 , to keep brightness
+	var weights_length 	= weights.length;
+	var weights_sum 	= utils.Math.SUM(weights);
+
+	for (var i = weights.length - 1; i >= 0; i--) {
+		weights[i] /= weights_sum;
+	};
 	
 	var dst = new Uint8ClampedArray(pixels);	// 深copy
 

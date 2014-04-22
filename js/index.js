@@ -104,11 +104,11 @@ window.onload = function() {
 	var image = new Image();
 	var drawImageBtn 	= document.getElementById("drawImageBtn");
 	var drawImageInput 	= document.getElementById('drawImageInput');
-	utils.bind(drawImageBtn,'mousedown',function() {
+	utils.bind(drawImageBtn,'mousedown',function() {		
 		image.crossOrigin = 'Anonymous';		
 			
 		image.onload = function() {			
-			context.drawImage(image,0,0);
+			context.drawImage(image,0,0,canvas.width,canvas.height);
 			/* 	v 0.0.3.6 CORS Image #ISSUE#
 				CORS_Enabled_Image 
 				https://developer.mozilla.org/en-US/docs/HTML/CORS_Enabled_Image	
@@ -137,6 +137,15 @@ window.onload = function() {
 		utils.trigger(drawImageBtn,'mousedown');
 	});
 	
+	// load Lenna image
+	var loadLennaImageBtn = document.getElementById('loadLennaImageBtn') ;
+	utils.bind(loadLennaImageBtn,'mousedown',function() {
+		// Load local image
+		drawImageInput.value = 'images/Lenna.png';
+		// trigger mousedown on drawImageInput
+		utils.trigger(drawImageBtn,'mousedown');
+	});
+
 	/*
 		v 0.0.4 More Filter Functions
 	*/
@@ -167,7 +176,7 @@ window.onload = function() {
 	utils.bind(filter_convolvingFilterBtn,'mousedown',function() {
 		// to maintain the brightness of the image , the sum of the matrix values should be one		
 		//var weights = [1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9];		// soften
-		var weights = [0,-1,0,-1,5,-1,0,-1,0];		// sharpen
+		var weights = filter_convolvingFilterInput.value.split(',').str2num();
 		utils.filters.convolute(imageData,weights);
 		context.putImageData(imageData,0,0);
 	});
@@ -175,13 +184,15 @@ window.onload = function() {
 	var filter_convolvingSharpenBtn 	= document.getElementById('filter_convolvingSharpenBtn');
 	utils.bind(filter_convolvingSharpenBtn,'mousedown',function() {
 		var weights = [0,-1,0,-1,5,-1,0,-1,0];		// sharpen
+		filter_convolvingFilterInput.value = weights;
 		utils.filters.convolute(imageData,weights);
 		context.putImageData(imageData,0,0);
 	})
 
 	var filter_convolvingBlurBtn 		= document.getElementById('filter_convolvingBlurBtn');
-	utils.bind(filter_convolvingSharpenBtn,'mousedown',function() {
+	utils.bind(filter_convolvingBlurBtn,'mousedown',function() {
 		var weights = [1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9,1/9];		// soften
+		filter_convolvingFilterInput.value = weights;
 		utils.filters.convolute(imageData,weights);
 		context.putImageData(imageData,0,0);
 	})

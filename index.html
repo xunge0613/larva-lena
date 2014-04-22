@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<title> Larva-Lena</title>
+    <meta name="description" content="Digital Image Process with HTML5 canvas, by 徐迅 Dalston Xu, http://xuxun.me">
+	<title>Larva Lenna | Digital Image Process with HTML5 canvas</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
 	<!-- Google Analytics -->
     <script>
@@ -51,35 +52,51 @@
 <body>
 	<canvas id="canvas" width="400" height="400"></canvas>
 
-	<section id="section_action">
-		<button id="reverseRGB">确认黑化</button>
-		<button id="grayscaleBtn">确认灰化</button>
-		<button id="disableGaoNeng">高能预警</button>
-		<div id="fillColor" class="buttonWithInput">
-			<input type="text" id="colorInput" placeholder="eg: #fff520" />
-			<button id="fillColorBtn">确认色化</button>	
-		</div>
+	<form id="section_action" onclick="return false;">
+        <fieldset>
+            <legend>灰度变换 / Gray Scale </legend>
+    		<button id="reverseRGB">确认黑化</button>
+    		<button id="grayscaleBtn">确认灰化</button>
+    		<button id="disableGaoNeng">高能预警</button>
+        </fieldset>
+        <fieldset>
+            <legend>彩色变换 / Color</legend>
+    		<div id="fillColor" class="buttonWithInput">
+    			<input type="text" id="colorInput" placeholder="eg: #fff520" />
+    			<button id="fillColorBtn">确认色化</button>	
+    		</div>
+            <div id="filter_brightness" class="buttonWithInput">
+                <input type="text" id="filter_brightnessInput" placeholder="Numeric Brightness Value" />
+                <button id="filter_brightnessBtn">要有光</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>图像变换 / Image</legend>
 		<div id="drawImage" class="buttonWithInput">
             <input type="text" id="drawImageInput" placeholder="eg: images/xiaobai.jpg" />      
             <button id="drawImageBtn">加载图片</button> 
             <button id="loadLocalImageBtn">本地图片</button>
+            <button id="loadLennaImageBtn">Lenna</button>
         </div>
-        <div id="filter_brightness" class="buttonWithInput">
-            <input type="text" id="filter_brightnessInput" placeholder="Numeric Brightness Value" />
-            <button id="filter_brightnessBtn">要有光</button>
-        </div>
-        <div id="filter_threshold_0_1" class="buttonWithInput">
-            <input type="text" id="filter_threshold_0_1Input" placeholder="Grayscale Threshold" />
-            <button id="filter_threshold_0_1Btn">阈值-黑白</button>
-        </div>
-        <div id="filter_convolvingFilter" class="buttonWithInput">
-            <input type="text" id="filter_convolvingFilterInput" placeholder="[w,w,w,w,w,w,w,w]" />
-            <button id="filter_convolvingFilterBtn">卷积滤波</button>
-            <button id="filter_convolvingSharpenBtn">锐化滤波</button>
-            <button id="filter_convolvingBlurBtn">平滑滤波</button>
-        </div>
+        </fieldset>
+        <fieldset>
+            <legend>简单滤波器 / Basic Filter</legend>
+            <div id="filter_threshold_0_1" class="buttonWithInput">
+                <input type="text" id="filter_threshold_0_1Input" placeholder="Grayscale Threshold" />
+                <button id="filter_threshold_0_1Btn">阈值-黑白</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>卷积滤波器 / Convoling Filter</legend>
+            <div id="filter_convolvingFilter" class="buttonWithInput">
+                <input type="text" id="filter_convolvingFilterInput" placeholder="w,w,w,w,w,w,w,w" />
+                <button id="filter_convolvingFilterBtn">DIY滤波</button>
+                <button id="filter_convolvingSharpenBtn">锐化滤波</button>
+                <button id="filter_convolvingBlurBtn">平滑滤波</button>
+            </div>
+        </fieldset>
 
-	</section>
+	</form>
 
 	<script src="js/utils.js"></script>
 	<script src="js/index.js"></script>  

@@ -1,3 +1,15 @@
+html {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+}
+#canvas {
+  display: block;
+}
+#section_action {
+  display: inline-block;
+}
+#section_action fieldset {
+  margin: 10px 0;
+}
 #section_action .buttonWithInput {
   margin: 10px 0;
 }

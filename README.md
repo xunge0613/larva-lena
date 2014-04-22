@@ -19,6 +19,7 @@ Ah...So, maybe it was just a joke... and Dalston Xu is just trying to use it to 
 
 ## Change Log
 
+#### v 0.0.5 UI Updates
 #### v 0.0.4 Basic DIP functions
 
 - Ajusting Brightness
