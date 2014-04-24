@@ -28,7 +28,7 @@ window.onload = function() {
 	//	test revserse RGB
 	var context = canvas.getContext('2d');
 	context.fillStyle="#fff520";
-	context.fillRect(0,0,315,315);	
+	context.fillRect(0,0,canvas.width,canvas.height);	
 
 	var imageData = context.getImageData(0,0,canvas.width,canvas.height);
 	var pixels    = imageData.data;
@@ -54,7 +54,7 @@ window.onload = function() {
 	fillColorBtn.addEventListener('mousedown',function() {
 		var color = utils.parseColor(colorInput.value);
 		context.fillStyle=color;
-		context.fillRect(0,0,315,315);
+		context.fillRect(0,0,canvas.width,canvas.height);
 	});
 
 	/* v 0.0.3.3 flash */
@@ -196,4 +196,24 @@ window.onload = function() {
 		utils.filters.convolute(imageData,weights);
 		context.putImageData(imageData,0,0);
 	})
+
+	/*
+		v 0.0.5	Frequency Filter
+
+		@Source: 	http://nklein.com/2009/09/fourier-transforms-in-javascript/
+		@note: 		the Canvas Width & Height must be Power of 2
+	*/
+
+	var fftData;
+	// FFT
+	var FFTBtn = document.getElementById('FFTBtn');
+	utils.bind( FFTBtn, 'mousedown', function() {
+		fftData = FFT('canvas');
+	});
+
+	// IFFT
+	var IFFTBtn = document.getElementById('IFFTBtn');
+	utils.bind( IFFTBtn, 'mousedown', function() {
+		IFFT( fftData,'canvas');
+	});
 };

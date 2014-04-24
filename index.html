@@ -51,7 +51,7 @@
 </head>
 <body>
     <noscript><img src="images/Lenna.png" alt="Lenna" title="Lenna"/></noscript>
-	<canvas id="canvas" width="400" height="400"></canvas>
+	<canvas id="canvas" width="256" height="256"></canvas>
 
 	<form id="section_action" onclick="return false;">
         <fieldset>
@@ -73,7 +73,7 @@
         </fieldset>
         <fieldset>
             <legend>图像变换 / Image</legend>
-		<div id="drawImage" class="buttonWithInput">
+		    <div id="drawImage" class="buttonWithInput">
             <input type="text" id="drawImageInput" placeholder="eg: images/xiaobai.jpg" />      
             <button id="drawImageBtn">加载图片</button> 
             <button id="loadLocalImageBtn">本地图片</button>
@@ -96,10 +96,17 @@
                 <button id="filter_convolvingBlurBtn">平滑滤波</button>
             </div>
         </fieldset>
-
+        <fieldset>
+            <legend>频域滤波器 / Frequency Filter</legend>
+            <div id="FFT" class="buttonWithInput">
+                <button id="FFTBtn">FFT</button>
+                <button id="IFFTBtn">IFFT</button>
+            </div>
+        </fieldset>
 	</form>
 
 	<script src="js/utils.js"></script>
+    <script src="lib/fft.js"></script>
 	<script src="js/index.js"></script>  
 </body>
 

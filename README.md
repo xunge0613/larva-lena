@@ -1,7 +1,7 @@
-larva-lena
+Larva Lenna
 ==========
 
-Ah...So, maybe it was just a joke... and Dalston Xu is just trying to use it to do some Digital Image Process with HTML5 canvas... in order to gain more web front end experience...^_^
+[Dalston Xu](http://xuxun.me/blog "Dalston Xu | 徐迅") is just trying to use it to do some Digital Image Process with HTML5 canvas... in order to gain more web front end experience...^_^
 
 
 ## Thanks to
@@ -11,6 +11,8 @@ Ah...So, maybe it was just a joke... and Dalston Xu is just trying to use it to 
 >  http://www.html5rocks.com/en/tutorials/canvas/imagefilters/
 >
 > 《图像处理和分析教程》
+>
+>  http://nklein.com/2009/09/fourier-transforms-in-javascript/ for FFT algorithm
 
 
 ## Demo 
@@ -18,13 +20,16 @@ Ah...So, maybe it was just a joke... and Dalston Xu is just trying to use it to 
 >  http://xuxun.me/lab/2012/larva-lena/
 
 ## Change Log
+ 
+#### v 0.0.5 Basic DIP functions (Frequency Filter )
+- Transformation de Fourier 
 
-#### v 0.0.5 UI Updates
-#### v 0.0.4 Basic DIP functions
+
+#### v 0.0.4 Basic DIP functions (Spatial Filter)
 
 - Ajusting Brightness
 - Grayscale Threshold Filter
-- Convolution Filter ( Sharpen, Blur) v 0.0.4.1 
+- Convolution Filter (Sharpen, Blur) v 0.0.4.1 
 
 #### v 0.0.3 Basic HTML5 Canvas Image Process
 
