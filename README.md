@@ -3,6 +3,18 @@ Larva Lenna
 
 [Dalston Xu](http://xuxun.me/blog "Dalston Xu | 徐迅") is just trying to use it to do some Digital Image Process with HTML5 canvas... in order to gain more web front end experience...^_^
 
+### 流程图
+```flow
+st=>start: Start
+e=>end
+op=>operation: My Operation
+cond=>condition: Yes or No?
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
 
 ## Thanks to
 
